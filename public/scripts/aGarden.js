@@ -11,14 +11,22 @@ function Leaf (base) {
   
   base.strokeColor = "black";
   
+  this.kidbase = function() {
+    var kidbase = this.base.clone(); 
+    //pick one of the two endpoints of the base
+    
+    
+    //rotate the kidbase by 60% by the selected point
+    kidbase.position -= 10;
+    return kidbase;
+  }
+  
   this.grow = function (event) {
     if (this.child==null) {
       if (event.count % 10==0) {
       
         //create the new child
-        var kidbase = this.base.clone(); 
-        kidbase.position -= 10;
-        this.child = new Leaf(kidbase);
+        this.child = new Leaf(this.kidbase());
         
         //give the child an ID and a pointer to its parent
         this.child.id = this.id + 1;
